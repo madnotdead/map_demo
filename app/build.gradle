@@ -1,12 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'madnotdead'
+            keyPassword 'madnotdead'
+            storeFile file('C:/Users/O23002/Documents/androidkey/release_key.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion '23.0.3'
-
     defaultConfig {
         applicationId "com.example.leandromaguna.myapp"
-        minSdkVersion 20
+        minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
