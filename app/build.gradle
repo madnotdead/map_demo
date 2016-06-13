@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'madnotdead'
-            keyPassword 'madnotdead'
-            storeFile file('C:/Users/O23002/Documents/androidkey/release_key.jks')
-            storePassword '123456'
+//            keyAlias 'madnotdead'
+            //          keyPassword 'madnotdead'
+            //        storeFile file('C:/Users/O23002/Documents/androidkey/release_key.jks')
+            //      storePassword '123456'
         }
     }
     compileSdkVersion 23
@@ -31,9 +31,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
     //    compile 'com.google.android.gms:play-services-maps:9.0.0'
     compile 'com.android.support:appcompat-v7:24.0.0-beta1'
-    compile 'com.google.android.gms:play-services:9.0.0'
-    compile 'com.google.android.gms:play-services-ads:9.0.0'
+    compile 'com.google.android.gms:play-services:9.0.2'
+    compile 'com.google.android.gms:play-services-ads:9.0.2'
     compile 'com.google.android.gms:play-services-analytics:9.0.0'
     compile 'com.google.android.gms:play-services-auth:9.0.0'
     compile 'com.google.android.gms:play-services-gcm:9.0.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
 }
