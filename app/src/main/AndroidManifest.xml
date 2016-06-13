@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.leandromaguna.myapp">
+    package="com.example.leandromaguna.myapp" >
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -49,15 +49,16 @@
         <activity
             android:name=".MiddleActivity"
             android:label="@string/my_location" />
-
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/my_places"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".LocationSourceDemoActivity"
+            android:label="@string/my_places"/>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

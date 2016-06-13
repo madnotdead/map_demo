@@ -1,10 +1,15 @@
 package com.example.leandromaguna.myapp;
 
+import java.util.UUID;
+
 /**
  * Created by madnotdead on 13/06/16.
  */
 public class Place {
 
+    public Place(){
+        mId = UUID.randomUUID();
+    }
     public String getTitle() {
         return mTitle;
     }
@@ -24,5 +29,10 @@ public class Place {
     private String mTitle;
     private String mAdress;
 
+    public UUID getId() {
+        return mId;
+    }
+
+    private UUID mId;
 
 }

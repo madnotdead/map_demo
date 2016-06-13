@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerViewAccessibilityDelegate;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import java.util.List;
 public class MainActivityFragment extends Fragment {
 
     RecyclerView recyclerView = null;
+    PlacesAdapter mAdapter = null;
+    List<Place> mPlaces = null;
 
     public MainActivityFragment() {
 
@@ -39,10 +42,19 @@ public class MainActivityFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        loadPlaces();
     }
 
     private void loadPlaces(){
-        List<Place> mPlaces;
+        PlacesFactory placesFactory = PlacesFactory.get(getActivity());
+        mPlaces = placesFactory.getPlaces();
+
+        if(mAdapter == null){
+            mAdapter = new PlacesAdapter(mPlaces);
+            recyclerView.setAdapter(mAdapter);
+        }else{
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     private class PlacesHolder extends RecyclerView.ViewHolder{
