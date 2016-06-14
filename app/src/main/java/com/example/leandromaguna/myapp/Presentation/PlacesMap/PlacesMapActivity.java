@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
- package com.example.leandromaguna.myapp;
+ package com.example.leandromaguna.myapp.Presentation.PlacesMap;
 
+        import com.example.leandromaguna.myapp.Presentation.PlacesDetails.PlaceDetailsActivity;
+        import com.example.leandromaguna.myapp.R;
+        import com.example.leandromaguna.myapp.Utils.PermissionUtils;
         import com.google.android.gms.common.ConnectionResult;
         import com.google.android.gms.common.api.GoogleApiClient;
         import com.google.android.gms.location.LocationServices;
-        import com.google.android.gms.maps.CameraUpdate;
+        import com.google.android.gms.location.places.Place;
         import com.google.android.gms.maps.CameraUpdateFactory;
         import com.google.android.gms.maps.GoogleMap;
         import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
         import com.google.android.gms.maps.LocationSource;
         import com.google.android.gms.maps.OnMapReadyCallback;
         import com.google.android.gms.maps.SupportMapFragment;
-        import com.google.android.gms.maps.model.CameraPosition;
         import com.google.android.gms.maps.model.LatLng;
         import com.google.android.gms.maps.model.Marker;
         import com.google.android.gms.maps.model.MarkerOptions;
@@ -57,7 +59,7 @@
  * Permission for {@link android.Manifest.permission#ACCESS_FINE_LOCATION} is requested at run
  * time. If the permission has not been granted, the Activity is finished with an error message.
  */
-public class MyLocationDemoActivity extends AppCompatActivity
+public class PlacesMapActivity extends AppCompatActivity
         implements
         OnMyLocationButtonClickListener,
         OnMapReadyCallback,
@@ -73,7 +75,7 @@ public class MyLocationDemoActivity extends AppCompatActivity
      */
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
-    private static final String TAG = MyLocationDemoActivity.class.getSimpleName();
+    private static final String TAG = PlacesMapActivity.class.getSimpleName();
     /**
      * Flag indicating whether a requested permission has been denied after returning in
      * {@link #onRequestPermissionsResult(int, String[], int[])}.
@@ -287,7 +289,10 @@ public class MyLocationDemoActivity extends AppCompatActivity
     @Override
     public void onMapLongClick(LatLng latLng) {
 
-        // Creating an instance of MarkerOptions
+
+        Intent i = new Intent(this, PlaceDetailsActivity.class);
+        startActivity(i);
+   /*     // Creating an instance of MarkerOptions
         MarkerOptions markerOptions = new MarkerOptions();
 
         // Setting latitude and longitude for the marker
@@ -300,11 +305,11 @@ public class MyLocationDemoActivity extends AppCompatActivity
         markerOptions.title("Marker Demo");
 
         // Adding marker on the Google Map
-        mMap.addMarker(markerOptions);
+        mMap.addMarker(markerOptions);*/
 //        if(markers.size() > 0){
 //
 //            markers.add(new MarkerOptions().position(latLng));
-//        }
+//        }latLng
 
     }
 

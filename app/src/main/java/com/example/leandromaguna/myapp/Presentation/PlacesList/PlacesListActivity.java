@@ -1,14 +1,16 @@
-package com.example.leandromaguna.myapp;
+package com.example.leandromaguna.myapp.Presentation.PlacesList;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.leandromaguna.myapp.Presentation.PlacesMap.PlacesMapActivity;
+import com.example.leandromaguna.myapp.R;
+
+public class PlacesListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i  = new Intent(getApplicationContext(),MyLocationDemoActivity.class);
+                Intent i  = new Intent(getApplicationContext(),PlacesMapActivity.class);
                 startActivity(i);
             }
         });

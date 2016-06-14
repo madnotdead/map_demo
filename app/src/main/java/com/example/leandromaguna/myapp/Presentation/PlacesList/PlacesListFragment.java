@@ -1,27 +1,30 @@
-package com.example.leandromaguna.myapp;
+package com.example.leandromaguna.myapp.Presentation.PlacesList;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerViewAccessibilityDelegate;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.leandromaguna.myapp.Model.Place;
+import com.example.leandromaguna.myapp.Model.PlacesFactory;
+import com.example.leandromaguna.myapp.R;
 
 import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class PlacesListFragment extends Fragment {
 
     RecyclerView recyclerView = null;
     PlacesAdapter mAdapter = null;
     List<Place> mPlaces = null;
 
-    public MainActivityFragment() {
+    public PlacesListFragment() {
 
     }
 

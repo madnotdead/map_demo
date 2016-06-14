@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.leandromaguna.myapp" >
+          package="com.example.leandromaguna.myapp">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -28,37 +28,32 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="@string/google_maps_key"/>
 
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".Presentation.Login.SplashScreenActivity"
             android:label="@string/title_activity_maps"
             android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".MyLocationDemoActivity"
-            android:label="@string/my_location" />
+            android:name=".Presentation.PlacesMap.PlacesMapActivity"
+            android:label="@string/my_location"/>
         <activity
-            android:name=".DemoMapActivity"
-            android:label="@string/my_location" />
-        <activity
-            android:name=".MiddleActivity"
-            android:label="@string/my_location" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".Presentation.PlacesList.PlacesListActivity"
             android:label="@string/my_places"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".LocationSourceDemoActivity"
-            android:label="@string/my_places"/>
+
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+            android:value="@integer/google_play_services_version"/>
+
+        <activity android:name=".Presentation.PlacesDetails.PlaceDetailsActivity">
+        </activity>
     </application>
 
 </manifest>

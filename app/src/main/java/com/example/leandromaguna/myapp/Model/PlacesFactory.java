@@ -1,4 +1,4 @@
-package com.example.leandromaguna.myapp;
+package com.example.leandromaguna.myapp.Model;
 
 import android.content.Context;
 
@@ -48,5 +48,11 @@ public class PlacesFactory {
         }
 
         return null;
+    }
+
+    public void savePlace(Place newPlace){
+
+        if(newPlace!= null)
+            mPlaces.add(newPlace);
     }
 }

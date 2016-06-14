@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.leandromaguna.myapp;
+package com.example.leandromaguna.myapp.Utils;
 
         import android.Manifest;
         import android.app.AlertDialog;
@@ -26,6 +26,8 @@ package com.example.leandromaguna.myapp;
         import android.support.v4.app.DialogFragment;
         import android.support.v7.app.AppCompatActivity;
         import android.widget.Toast;
+
+        import com.example.leandromaguna.myapp.R;
 
 /**
  * Utility class for access to runtime permissions.
