@@ -1,5 +1,9 @@
 package com.example.leandromaguna.myapp;
 
+import android.location.Location;
+
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.UUID;
 
 /**
@@ -13,6 +17,16 @@ public class Place {
     public String getTitle() {
         return mTitle;
     }
+
+    public LatLng getLocation() {
+        return mLocation;
+    }
+
+    public void setLocation(LatLng location) {
+        mLocation = location;
+    }
+
+    private LatLng mLocation;
 
     public void setTitle(String title) {
         mTitle = title;

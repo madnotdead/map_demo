@@ -102,7 +102,7 @@ public class LocationSourceDemoActivity extends AppCompatActivity implements OnM
     @Override
     protected void onPause() {
         super.onPause();
-        mLocationSource.onPause();
+            mLocationSource.onPause();
     }
 
     @Override
