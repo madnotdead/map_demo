@@ -47,6 +47,7 @@ public class PlaceDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 _placeService.savePlace("description","name",false,new LatLng(10,10));
+                getActivity().finish();
             }
         });
         return v;

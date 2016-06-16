@@ -1,5 +1,6 @@
 package com.example.leandromaguna.myapp.Presentation.PlacesList;
 
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.leandromaguna.myapp.Application.PlaceService;
 import com.example.leandromaguna.myapp.Model.Place;
 import com.example.leandromaguna.myapp.Model.PlacesFactory;
 import com.example.leandromaguna.myapp.R;
@@ -23,9 +25,16 @@ public class PlacesListFragment extends Fragment {
     RecyclerView recyclerView = null;
     PlacesAdapter mAdapter = null;
     List<Place> mPlaces = null;
+    PlaceService _placeService;
 
     public PlacesListFragment() {
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        _placeService = new PlaceService(getActivity());
     }
 
     @Override
@@ -50,7 +59,7 @@ public class PlacesListFragment extends Fragment {
 
     private void loadPlaces(){
         PlacesFactory placesFactory = PlacesFactory.get(getActivity());
-        mPlaces = placesFactory.getPlaces();
+        mPlaces = _placeService.getAllPlaces();
 
         if(mAdapter == null){
             mAdapter = new PlacesAdapter(mPlaces);

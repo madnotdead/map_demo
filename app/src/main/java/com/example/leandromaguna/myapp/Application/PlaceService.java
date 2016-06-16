@@ -5,6 +5,8 @@ import android.content.Context;
 import com.example.leandromaguna.myapp.Model.Place;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.List;
+
 /**
  * Created by thecocacolauser on 6/14/16.
  */
@@ -26,5 +28,9 @@ public class PlaceService {
         mPlace.setLocation(position);
 
         _placeRespository.Save(mPlace);
+    }
+
+    public List<Place> getAllPlaces(){
+        return _placeRespository.GetAllPlaces();
     }
 }
