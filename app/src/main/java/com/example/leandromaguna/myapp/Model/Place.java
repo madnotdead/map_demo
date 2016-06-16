@@ -14,6 +14,8 @@ import java.util.UUID;
 @DatabaseTable(tableName = "Place")
 public class Place {
 
+    @DatabaseField(generatedId = true)
+    private long id;
     @DatabaseField
     private UUID mId;
 
@@ -23,7 +25,6 @@ public class Place {
     @DatabaseField
     private String mAdress;
 
-    @DatabaseField
     private LatLng mLocation;
 
     @DatabaseField
@@ -55,7 +56,7 @@ public class Place {
         return mLocation;
     }
 
-    public void setLocatiwon(LatLng location) {
+    public void setLocation(LatLng location) {
         mLocation = location;
 
         //TODO: fix assignment

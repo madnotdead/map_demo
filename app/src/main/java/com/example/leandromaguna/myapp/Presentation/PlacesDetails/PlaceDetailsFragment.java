@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.leandromaguna.myapp.Application.PlaceService;
 import com.example.leandromaguna.myapp.Model.PlacesFactory;
 import com.example.leandromaguna.myapp.R;
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by thecocacolauser on 6/14/16.
@@ -18,7 +20,7 @@ import com.example.leandromaguna.myapp.R;
 public class PlaceDetailsFragment extends Fragment {
 
     private Button saveButton;
-
+    private PlaceService _placeService;
     public static PlaceDetailsFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -26,6 +28,12 @@ public class PlaceDetailsFragment extends Fragment {
         PlaceDetailsFragment fragment = new PlaceDetailsFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        _placeService = new PlaceService(getActivity());
     }
 
     @Nullable
@@ -38,7 +46,7 @@ public class PlaceDetailsFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                _placeService.savePlace("description","name",false,new LatLng(10,10));
             }
         });
         return v;

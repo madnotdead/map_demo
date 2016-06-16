@@ -1,5 +1,7 @@
 package com.example.leandromaguna.myapp.Application;
 
+import android.content.Context;
+
 import com.example.leandromaguna.myapp.Model.Place;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -10,6 +12,10 @@ public class PlaceService {
 
     IPlaceRepository _placeRespository;
 
+    public PlaceService(Context context){
+        _placeRespository = new PlaceRepository(new DatabaseHelper(context));
+    }
+
     public void savePlace(String name, String description, boolean isPublic, LatLng position){
 
         Place mPlace = new Place();
@@ -17,7 +23,7 @@ public class PlaceService {
         mPlace.setTitle(name);
         mPlace.setAdress(description);
         mPlace.setPublic(isPublic);
-        mPlace.setLocatiwon(position);
+        mPlace.setLocation(position);
 
         _placeRespository.Save(mPlace);
     }
