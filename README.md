@@ -5,11 +5,10 @@ This is a little demo to test some google services as login and maps. Another fr
 
 #Current features
 
-*Places list
-*Map with places
-*Place details
-*Dummy drawer
-
+* Place's list
+* Place's detail
+* Place's map
+* Dummy navigation drawer
 
 #Flow
 
