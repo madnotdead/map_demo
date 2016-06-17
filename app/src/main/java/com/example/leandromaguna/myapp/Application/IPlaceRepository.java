@@ -14,6 +14,6 @@ import javax.inject.Singleton;
 
 public interface IPlaceRepository {
 
-    void Save(Place place);
+    boolean Save(Place place);
     List<Place> GetAllPlaces();
 }

@@ -53,7 +53,7 @@ public class Place {
     }
 
     public LatLng getLocation() {
-        return mLocation;
+        return new LatLng(lat,lng);
     }
 
     public void setLocation(LatLng location) {

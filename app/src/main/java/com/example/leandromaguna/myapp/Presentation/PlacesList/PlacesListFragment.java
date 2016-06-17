@@ -1,5 +1,6 @@
 package com.example.leandromaguna.myapp.Presentation.PlacesList;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -9,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.leandromaguna.myapp.Application.PlaceService;
 import com.example.leandromaguna.myapp.Model.Place;
 import com.example.leandromaguna.myapp.Model.PlacesFactory;
+import com.example.leandromaguna.myapp.Presentation.PlacesMap.PlacesMapActivity;
 import com.example.leandromaguna.myapp.R;
 
 import java.util.List;
@@ -65,11 +68,12 @@ public class PlacesListFragment extends Fragment {
             mAdapter = new PlacesAdapter(mPlaces);
             recyclerView.setAdapter(mAdapter);
         }else{
+            mAdapter.SetList(mPlaces);
             mAdapter.notifyDataSetChanged();
         }
     }
 
-    private class PlacesHolder extends RecyclerView.ViewHolder{
+    private class PlacesHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private Place mPlace = null;
 
@@ -80,6 +84,8 @@ public class PlacesListFragment extends Fragment {
             super(itemView);
             mNameTextView = (TextView) itemView.findViewById(R.id.list_item_place_title_text_view);
             mAdressTextView = (TextView)itemView.findViewById(R.id.list_item_place_adress_text_view);
+
+            itemView.setOnClickListener(this);
         }
 
         private void bindPlace(Place place){
@@ -89,11 +95,21 @@ public class PlacesListFragment extends Fragment {
             mAdressTextView.setText(place.getAdress());
 
         }
+
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(getActivity(),PlacesMapActivity.class);
+            i.putExtra("selectedLocation",mPlace.getLocation());
+            startActivity(i);
+        }
     }
     private class PlacesAdapter extends RecyclerView.Adapter<PlacesHolder>{
 
         private List<Place> mPlacesList;
 
+        public void SetList(List<Place> places){
+            mPlacesList = places;
+        }
         public PlacesAdapter(List<Place> places){
 
             mPlacesList = places;
@@ -120,5 +136,6 @@ public class PlacesListFragment extends Fragment {
         public int getItemCount() {
             return mPlacesList.size();
         }
+
     }
 }

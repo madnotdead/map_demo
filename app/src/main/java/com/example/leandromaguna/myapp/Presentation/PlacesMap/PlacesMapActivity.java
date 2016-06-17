@@ -16,6 +16,7 @@
 
  package com.example.leandromaguna.myapp.Presentation.PlacesMap;
 
+        import com.example.leandromaguna.myapp.Application.PlaceService;
         import com.example.leandromaguna.myapp.Presentation.PlacesDetails.PlaceDetailsActivity;
         import com.example.leandromaguna.myapp.R;
         import com.example.leandromaguna.myapp.Utils.PermissionUtils;
@@ -23,6 +24,7 @@
         import com.google.android.gms.common.api.GoogleApiClient;
         import com.google.android.gms.location.LocationServices;
         import com.google.android.gms.location.places.Place;
+        import com.google.android.gms.maps.CameraUpdate;
         import com.google.android.gms.maps.CameraUpdateFactory;
         import com.google.android.gms.maps.GoogleMap;
         import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
@@ -41,6 +43,7 @@
         import android.location.Location;
         import android.location.LocationManager;
         import android.os.Bundle;
+        import android.preference.PreferenceManager;
         import android.support.annotation.NonNull;
         import android.support.annotation.Nullable;
         import android.support.v4.app.ActivityCompat;
@@ -87,8 +90,11 @@ public class PlacesMapActivity extends AppCompatActivity
     private GoogleApiClient mApiClient;
 
     private Location currentLocation;
+     private LatLng selectedLocation;
 
+     private final int REQUEST_PLACE = 1;
 
+     private PlaceService _placeService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,8 +109,26 @@ public class PlacesMapActivity extends AppCompatActivity
 
         if(savedInstanceState != null)
             firstTime = savedInstanceState.getBoolean("firstTime");
+
+        _placeService = new PlaceService(this);
+
+        Log.i(TAG,"onCreate");
+        getMarkers();
+
+        if(getIntent().getExtras() != null){
+            selectedLocation = (LatLng)getIntent().getExtras().get("selectedLocation");
+        }
+
+
     }
 
+     private void getMarkers(){
+
+         for (com.example.leandromaguna.myapp.Model.Place place:_placeService.getAllPlaces()) {
+             LatLng location = place.getLocation() == null ? new LatLng(10,10) : place.getLocation();
+             markers.add(new MarkerOptions().position(location).title(place.getTitle()).snippet(place.getAdress()));
+         }
+     }
     @Override
     protected void onStart() {
         super.onStart();
@@ -123,6 +147,7 @@ public class PlacesMapActivity extends AppCompatActivity
 
     @Override
     public void onMapReady(GoogleMap map) {
+        Log.i(TAG,"onMapReady()");
         mMap = map;
 
         mMap.setOnMyLocationButtonClickListener(this);
@@ -133,6 +158,7 @@ public class PlacesMapActivity extends AppCompatActivity
                 marker.remove();
             }
         });
+        setMarkersOnMap();
         enableMyLocation();
     }
 
@@ -159,7 +185,11 @@ public class PlacesMapActivity extends AppCompatActivity
 //            mMap.setLocationSource(mLocationSource);
 //            mMap.setOnMapLongClickListener(mLocationSource);
 //
-            Log.d(TAG,"enableMyLocation()");
+                Log.d(TAG,"enableMyLocation()");
+
+            if(selectedLocation != null){
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(selectedLocation,15));
+            }
         }
     }
 
@@ -229,9 +259,16 @@ public class PlacesMapActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-//        mLocationSource.onResume();
     }
 
+    private void setMarkersOnMap(){
+        Log.i(TAG,"setMarkersOnMap()");
+        Log.i(TAG,"markers.size()" + markers.size() );
+        mMap.clear();
+        for (MarkerOptions marker:markers) {
+            mMap.addMarker(marker);
+        }
+    }
     /**
      * Displays a dialog with error message explaining that the location permission is missing.
      */
@@ -259,7 +296,7 @@ public class PlacesMapActivity extends AppCompatActivity
             Log.w("CurrentLocation", "Latitud: " + currentLocation.getLatitude() + " - " + "Latitud: " + currentLocation.getLongitude());
             if(mMap!=null && firstTime){
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),15));
+//                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),15));
                 firstTime = false;
 
             }
@@ -291,7 +328,8 @@ public class PlacesMapActivity extends AppCompatActivity
 
 
         Intent i = new Intent(this, PlaceDetailsActivity.class);
-        startActivity(i);
+        i.putExtra("currentLocation",latLng);
+        startActivityForResult(i,REQUEST_PLACE);
    /*     // Creating an instance of MarkerOptions
         MarkerOptions markerOptions = new MarkerOptions();
 
@@ -313,54 +351,26 @@ public class PlacesMapActivity extends AppCompatActivity
 
     }
 
+     @Override
+     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+         super.onActivityResult(requestCode, resultCode, data);
 
+         if(requestCode == REQUEST_PLACE){
+             if(resultCode == RESULT_OK){
+                 Log.i(TAG,"REQUEST_PLACE/RESULT_OK");
+                 //Agrego marker a la lista
+                 Bundle newPlace = data.getBundleExtra("savedPlace");
+                 MarkerOptions newMarker = new MarkerOptions()
+                         .position((LatLng)newPlace.get("position"))
+                         .title((String)newPlace.get("title"))
+                         .snippet((String)newPlace.get("description"));
+                 markers.add(newMarker);
 
-    /**
-     * A {@link LocationSource} which reports a new location whenever a user long presses the map
-     * at
-     * the point at which a user long pressed the map.
-     */
-    private static class LongPressLocationSource implements LocationSource, GoogleMap.OnMapLongClickListener {
+                 setMarkersOnMap();
 
-        private OnLocationChangedListener mListener;
-
-        /**
-         * Flag to keep track of the activity's lifecycle. This is not strictly necessary in this
-         * case because onMapLongPress events don't occur while the activity containing the map is
-         * paused but is included to demonstrate best practices (e.g., if a background service were
-         * to be used).
-         */
-        private boolean mPaused;
-
-        @Override
-        public void activate(OnLocationChangedListener listener) {
-            mListener = listener;
-        }
-
-        @Override
-        public void deactivate() {
-            mListener = null;
-        }
-
-        @Override
-        public void onMapLongClick(LatLng point) {
-            if (mListener != null && !mPaused) {
-                Location location = new Location("LongPressLocationProvider");
-                location.setLatitude(point.latitude);
-                location.setLongitude(point.longitude);
-                location.setAccuracy(100);
-                mListener.onLocationChanged(location);
-            }
-        }
-
-        public void onPause() {
-            mPaused = true;
-        }
-
-        public void onResume() {
-            mPaused = false;
-        }
-    }
-
-    private LongPressLocationSource mLocationSource;
-}
+             }else{
+                 Log.i(TAG,"REQUEST_PLACE/ELSE");
+             }
+         }
+     }
+ }

@@ -18,7 +18,7 @@ public class PlaceService {
         _placeRespository = new PlaceRepository(new DatabaseHelper(context));
     }
 
-    public void savePlace(String name, String description, boolean isPublic, LatLng position){
+    public boolean savePlace(String name, String description, boolean isPublic, LatLng position){
 
         Place mPlace = new Place();
 
@@ -27,7 +27,7 @@ public class PlaceService {
         mPlace.setPublic(isPublic);
         mPlace.setLocation(position);
 
-        _placeRespository.Save(mPlace);
+       return _placeRespository.Save(mPlace);
     }
 
     public List<Place> getAllPlaces(){
