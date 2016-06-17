@@ -23,4 +23,4 @@ This is a little demo to test some google services as login and maps. Another fr
 
 This project is under development, be aware of breaking changes.
 
-FOR PROPER USE UPDATE YOURE GOOGLE SERVICES.
+FOR PROPER USE UPDATE YOUR GOOGLE SERVICES.
