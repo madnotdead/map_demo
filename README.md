@@ -1,2 +1,26 @@
-# map_location
-Aplicación demo para probar la funcionalidad de los mapas a traves de los servicios de Google
+Map Demo
+========
+
+This is a little demo to test some google services as login and maps. Another frameworks are included like ORMLite and Dagger. It is possible that some are included but not used at the moment.
+
+#Current features
+
+*Places list
+*Map with places
+*Place details
+*Dummy drawer
+
+
+#Flow
+
+1. Open the app
+2. Click on the map button
+3. Long click on map to add new place
+4. Navigate throught the map to search for places
+5. Go back to the list to see the places listed
+6. Click on a list's item to navigate to the position in the map.
+7. Enjoy
+
+This project is under development, be aware of breaking changes.
+
+FOR PROPER USE UPDATE YOURE GOOGLE SERVICES.
