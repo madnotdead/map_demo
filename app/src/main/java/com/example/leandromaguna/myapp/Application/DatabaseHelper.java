@@ -7,9 +7,12 @@ import android.util.Log;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 
+import dagger.Module;
+
 /**
  * Created by thecocacolauser on 6/14/16.
  */
+
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private final String TAG = DatabaseHelper.class.getSimpleName();

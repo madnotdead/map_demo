@@ -14,6 +14,7 @@ public class PlaceRepository implements IPlaceRepository {
 
     Dao<Place,?> placeDao;
 
+
     public PlaceRepository(DatabaseHelper databaseHelper){
 
         try{

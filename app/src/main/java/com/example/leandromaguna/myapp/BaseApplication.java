@@ -27,7 +27,7 @@ public class BaseApplication extends Application {
      * provide additional modules provided they call {@code super.getModules()}.
      */
     protected List<Object> getModules() {
-        return Arrays.<Object>asList(new AndroidModule(this));
+        return Arrays.<Object>asList(/*new AndroidModule(this),*/new MapModule(this));
     }
 
     ObjectGraph getApplicationGraph() {
