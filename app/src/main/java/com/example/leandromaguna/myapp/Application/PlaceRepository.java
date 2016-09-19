@@ -7,9 +7,14 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.Module;
+
 /**
  * Created by thecocacolauser on 6/14/16.
  */
+
 public class PlaceRepository implements IPlaceRepository {
 
     Dao<Place,?> placeDao;
@@ -25,11 +30,14 @@ public class PlaceRepository implements IPlaceRepository {
 
     }
     @Override
-    public void Save(Place place) {
+    public boolean Save(Place place) {
         try {
             placeDao.createOrUpdate(place);
+
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

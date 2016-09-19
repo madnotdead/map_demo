@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.neenbedankt.android-apt'
 android {
     signingConfigs {
         config {
@@ -17,32 +17,52 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
+
+
+    signingConfigs{
+        release{
+            println(rootProject.projectDir.absolute)
+            storeFile file(rootProject.projectDir.absolutePath+'\\app\\map_key.jks')
+            storePassword "123456"
+            keyAlias "madnotdead"
+            keyPassword "123456"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
+
+
+
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     //    compile 'com.google.android.gms:play-services-maps:9.0.0'
-    compile 'com.android.support:appcompat-v7:23.0.0-beta1'
+    // apt command comes from the android-apt plugin
+    apt 'com.google.dagger:dagger-compiler:2.2'
+    provided 'javax.annotation:jsr250-api:1.0'
+
+//    compile 'com.squareup.dagger:dagger:1.2.5'
+    compile 'com.android.support:appcompat-v7:23.0.0'
     compile 'com.google.android.gms:play-services:9.0.2'
-    compile 'com.google.android.gms:play-services-ads:9.0.2'
-    compile 'com.google.android.gms:play-services-analytics:9.0.0'
-    compile 'com.google.android.gms:play-services-auth:9.0.0'
-    compile 'com.google.android.gms:play-services-gcm:9.0.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
+//    compile 'com.google.android.gms:play-services-ads:9.0.2'
+//    compile 'com.google.android.gms:play-services-analytics:9.0.0'
+//    compile 'com.google.android.gms:play-services-auth:9.0.2'
+    compile 'com.google.android.gms:play-services-gcm:9.0.2'
+    compile 'com.android.support:design:23.0.0'
+    compile 'com.android.support:recyclerview-v7:23.0.0'
     compile 'com.j256.ormlite:ormlite-android:4.48'
     compile 'com.jakewharton:butterknife:8.0.1'
-    // apt command comes from the android-apt plugin
-    //    apt 'com.google.dagger:dagger-compiler:2.2'
-    //    compile 'com.google.dagger:dagger:2.2'
-    //    provided 'javax.annotation:jsr250-api:1.0'
-    compile 'com.squareup.dagger:dagger:1.2.5'
+    compile 'com.google.dagger:dagger:2.2'
+    compile 'com.android.support:multidex:1.0.0'
+
 }
